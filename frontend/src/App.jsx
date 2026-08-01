@@ -1,12 +1,11 @@
 import React from 'react'
-import Homepage from './Homepage.jsx'
-import Register from './components/Register.jsx'
+import Body from './components/Body.jsx'
+
 function App() {
   return (
       <div>
-            <Register/>
+            <Body/>
                 </div>
                   )
                   }
-
                   export default App
