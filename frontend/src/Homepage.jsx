@@ -5,7 +5,7 @@ import Homeimgs from './assets/Homeimgs.jpg';
   function Homepage() {
     return (
       <>
-    <div className=" flex absolute bg-red-300 h-[100vh]">
+    <div className="   bg-red-300 h-[100vh]">
           <h1 className="text-5xl font-bold ml-20 pt-25">MERN Stack Development<br/> Workshop's</h1>
           <p className='text-1xl ml-30 pt-10 font-bold'>About workshop</p>
           <p className='ml-30 '>The MERN Stack Development Workshop was designed to provide 
