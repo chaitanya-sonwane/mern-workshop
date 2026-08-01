@@ -1,9 +1,10 @@
 import React from 'react'
 import Homepage from './Homepage.jsx'
+import Register from './components/Register.jsx'
 function App() {
   return (
       <div>
-            <Homepage/>
+            <Register/>
                 </div>
                   )
                   }
