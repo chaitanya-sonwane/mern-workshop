@@ -11,13 +11,24 @@ function Register() {
     workshopName: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
+  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User Registered:", formData);
+
+    // ✅ Frontend validation
+    if (!/^\d{10}$/.test(formData.mobile)) {
+      alert("Mobile number must be exactly 10 digits");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:5000/register", {
@@ -33,6 +44,8 @@ function Register() {
       console.error("Error registering user:", error);
       alert("Registration failed!");
     }
+
+    setLoading(false);
   };
 
   return (
@@ -41,7 +54,9 @@ function Register() {
         onSubmit={handleSubmit}
         className="bg-gray-800 p-8 rounded-lg shadow-lg w-96"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Workshop Registration</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Workshop Registration
+        </h2>
 
         <input
           type="text"
@@ -50,6 +65,7 @@ function Register() {
           value={formData.fullName}
           onChange={handleChange}
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
@@ -59,15 +75,19 @@ function Register() {
           value={formData.email}
           onChange={handleChange}
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
-          type="text"
+          type="tel"
           name="mobile"
           placeholder="Mobile Number"
           value={formData.mobile}
           onChange={handleChange}
+          pattern="[0-9]{10}"
+          maxLength="10"
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
@@ -77,6 +97,7 @@ function Register() {
           value={formData.organization}
           onChange={handleChange}
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
@@ -86,6 +107,7 @@ function Register() {
           value={formData.profession}
           onChange={handleChange}
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
@@ -95,6 +117,7 @@ function Register() {
           value={formData.city}
           onChange={handleChange}
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <input
@@ -104,13 +127,17 @@ function Register() {
           value={formData.workshopName}
           onChange={handleChange}
           className="w-full p-2 mb-6 rounded bg-gray-700 focus:outline-none"
+          required
         />
 
         <button
           type="submit"
-          className="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold"
+          disabled={loading}
+          className={`w-full py-2 rounded font-semibold ${
+            loading ? "bg-gray-600" : "bg-red-600 hover:bg-red-700"
+          }`}
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>
