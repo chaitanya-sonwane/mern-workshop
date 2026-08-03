@@ -44,13 +44,13 @@ Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
       } else {
         alert(res.data.message);
       }
-   } catch (err) {
-  console.error(err);
-  alert("Error registering user. Please try again.");
-} finally {
-  setLoading(false);
-}
-
+    } catch (err) {
+      console.error(err);
+      alert("Error registering user. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
@@ -136,5 +136,5 @@ Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
     </div>
   );
 }
-}
+
 export default Register;
