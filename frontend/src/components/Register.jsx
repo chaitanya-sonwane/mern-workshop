@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
- 
+  const navigate = useNavigate(); // ✅ move to top
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -34,8 +35,7 @@ function Register() {
 
       if (res.status === 201) {
         const u = res.data.user;
-        // ✅ Redirect to success page with user data
-        navigate("/success", { state: { user: u } });
+        navigate("/success", { state: { user: u } }); // ✅ works fine now
       } else {
         alert(res.data.message);
       }
@@ -50,13 +50,11 @@ function Register() {
       setLoading(false);
     }
   };
- const navigate = useNavigate(); // ✅ inside component
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white rounded-lg shadow-lg overflow-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">Workshop Registration</h2>
       <form onSubmit={handleSubmit}>
-        {/* All input fields same as before */}
         <input
           type="text"
           name="fullName"
@@ -66,7 +64,65 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-        {/* ...other inputs... */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
+        <input
+          type="tel"
+          name="mobile"
+          placeholder="Mobile Number"
+          value={formData.mobile}
+          onChange={(e) => {
+            const value = e.target.value.replace(/\D/g, "");
+            if (value.length <= 10) {
+              setFormData({ ...formData, mobile: value });
+            }
+          }}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="organization"
+          placeholder="College / Organization Name"
+          value={formData.organization}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="profession"
+          placeholder="Course / Profession"
+          value={formData.profession}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="city"
+          placeholder="City"
+          value={formData.city}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
+        <input
+          type="text"
+          name="workshopName"
+          placeholder="Workshop Name"
+          value={formData.workshopName}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
         <button
           type="submit"
           disabled={loading}
