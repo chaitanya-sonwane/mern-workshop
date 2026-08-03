@@ -74,16 +74,21 @@ Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-        <input
-          type="tel"
-          name="mobile"
-          placeholder="Mobile Number"
-          value={formData.mobile}
-          onChange={handleChange}
-          pattern="\d{10}"
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
+       <input
+  type="tel"
+  name="mobile"
+  placeholder="Mobile Number"
+  value={formData.mobile}
+  onChange={(e) => {
+    const value = e.target.value.replace(/\D/g, ""); // sirf digits allow
+    if (value.length <= 10) {
+      setFormData({ ...formData, mobile: value });
+    }
+  }}
+  className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+  required
+/>
+
         <input
           type="text"
           name="organization"
