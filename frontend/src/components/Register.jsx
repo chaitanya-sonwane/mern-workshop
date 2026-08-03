@@ -46,7 +46,11 @@ Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
       }
     } catch (err) {
       console.error(err);
-      alert("Error registering user. Please try again.");
+      if (err.response && err.response.status === 400) {
+        alert(err.response.data.message); // ✅ Already registered message
+      } else {
+        alert("Error registering user. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -74,21 +78,20 @@ Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-       <input
-  type="tel"
-  name="mobile"
-  placeholder="Mobile Number"
-  value={formData.mobile}
-  onChange={(e) => {
-    const value = e.target.value.replace(/\D/g, ""); // sirf digits allow
-    if (value.length <= 10) {
-      setFormData({ ...formData, mobile: value });
-    }
-  }}
-  className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-  required
-/>
-
+        <input
+          type="tel"
+          name="mobile"
+          placeholder="Mobile Number"
+          value={formData.mobile}
+          onChange={(e) => {
+            const value = e.target.value.replace(/\D/g, "");
+            if (value.length <= 10) {
+              setFormData({ ...formData, mobile: value });
+            }
+          }}
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+          required
+        />
         <input
           type="text"
           name="organization"
