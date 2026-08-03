@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
 
 function SuccessPage() {
-  const { state } = useLocation();
-  const user = state?.user;
+  const { state } = useLocation(); // ✅ correct syntax
+  const user = state?.user;        // ✅ safely access user
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-green-800 text-white rounded-lg shadow-lg text-center">

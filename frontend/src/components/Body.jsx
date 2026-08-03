@@ -4,7 +4,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
-import SuccessPage from "./Successpage";
+import SuccessPage from "./SuccessPage";
+
 
 const  Body=()=> {
    const appRouter = createBrowserRouter([
