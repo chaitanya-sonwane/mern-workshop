@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -13,51 +14,48 @@ function Register() {
 
   const [loading, setLoading] = useState(false);
 
-  // Handle input change
+  // ✅ Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submit
+  // ✅ Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Frontend validation
+    // Frontend validation
     if (!/^\d{10}$/.test(formData.mobile)) {
       alert("Mobile number must be exactly 10 digits");
       return;
     }
 
     setLoading(true);
-
     try {
-      const response = await fetch("http://localhost:5000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await axios.post("http://localhost:5000/register", formData);
 
-      const data = await response.json();
-      console.log("Response from backend:", data);
-      alert(data.message);
-    } catch (error) {
-      console.error("Error registering user:", error);
-      alert("Registration failed!");
+      if (res.status === 201) {
+        const u = res.data.user;
+        alert(`Registration Successful!
+Name: ${u.fullName}
+ID: WG${u._id.toString().slice(-4)}
+Workshop: ${u.workshopName}
+Date: ${new Date(u.registrationDate).toLocaleDateString()}
+Time: ${new Date(u.registrationDate).toLocaleTimeString()}`);
+      } else {
+        alert(res.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error registering user. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg w-96"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Workshop Registration
-        </h2>
-
+    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center">Workshop Registration</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="fullName"
@@ -67,7 +65,6 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="email"
           name="email"
@@ -77,19 +74,16 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="tel"
           name="mobile"
           placeholder="Mobile Number"
           value={formData.mobile}
           onChange={handleChange}
-          pattern="[0-9]{10}"
-          maxLength="10"
+          pattern="\d{10}"
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="text"
           name="organization"
@@ -99,7 +93,6 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="text"
           name="profession"
@@ -109,7 +102,6 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="text"
           name="city"
@@ -119,23 +111,19 @@ function Register() {
           className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <input
           type="text"
           name="workshopName"
           placeholder="Workshop Name"
           value={formData.workshopName}
           onChange={handleChange}
-          className="w-full p-2 mb-6 rounded bg-gray-700 focus:outline-none"
+          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
           required
         />
-
         <button
           type="submit"
           disabled={loading}
-          className={`w-full py-2 rounded font-semibold ${
-            loading ? "bg-gray-600" : "bg-red-600 hover:bg-red-700"
-          }`}
+          className="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-semibold"
         >
           {loading ? "Registering..." : "Register"}
         </button>
