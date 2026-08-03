@@ -1,5 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -19,6 +22,7 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  
   // ✅ Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();

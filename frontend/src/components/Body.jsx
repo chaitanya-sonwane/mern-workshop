@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Homepage from "./Homepage";
 import Dashboard from "./Dashboard";
+import SuccessPage from "./Successpage";
 
 const  Body=()=> {
    const appRouter = createBrowserRouter([
@@ -23,6 +24,10 @@ const  Body=()=> {
   {
     path: "/Dashboard",
     element: <Dashboard />, // ✅ hona chahiye
+  },
+  {
+    path: "/success",
+    element: <SuccessPage />, // ✅ hona chahiye
   }
 ]);
 
