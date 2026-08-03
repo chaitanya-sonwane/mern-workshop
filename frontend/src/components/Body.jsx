@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Homepage from "./Homepage";
-import Dashboard from "./Dashabord";
+import Dashboard from "./Dashboard";
 
 const  Body=()=> {
    const appRouter = createBrowserRouter([
@@ -21,8 +21,8 @@ const  Body=()=> {
     element: <Login />, // ✅ hona chahiye
   },
   {
-    path: "/dashabord",
-    element: <Dashabord />, // ✅ hona chahiye
+    path: "/Dashboard",
+    element: <Dashboard />, // ✅ hona chahiye
   }
 ]);
 
