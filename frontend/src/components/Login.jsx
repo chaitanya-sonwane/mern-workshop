@@ -6,19 +6,20 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/login", { email, password });
-      if (res.data.role === "admin") {
-        alert("Admin login successful!");
-        window.location.href = "/admin-dashboard";
-      } else {
-        alert(res.data.message);
-      }
-    } catch {
-      alert("Login failed. Please try again.");
+  e.preventDefault();
+  try {
+    const res = await axios.post("http://localhost:5000/login", { email, password });
+    if (res.data.role === "admin") {
+      alert("Welcome Admin!");
+      navigate("/dashboard"); // admin page
+    } else {
+      alert("Access denied: Only admin can login");
     }
-  };
+  } catch (err) {
+    alert("Invalid credentials or server error");
+  }
+};
+
 
   return (
     <div className="login-container">
