@@ -6,10 +6,13 @@ const Dashboard = () => {
   const [participants, setParticipants] = useState([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    axios.get("/api/dashboard").then(res => setStats(res.data));
-    axios.get("/api/participants").then(res => setParticipants(res.data));
-  }, []);
+ useEffect(() => {
+  axios.get("/api/participants").then(res => {
+    console.log("Participants API response:", res.data);
+    setParticipants(res.data);
+  });
+}, []);
+
 
   const filtered = participants.filter(p =>
     p?.fullName?.toLowerCase().includes(search.toLowerCase())
