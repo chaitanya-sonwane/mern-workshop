@@ -22,10 +22,8 @@ const  Body=()=> {
     path: "/login",
     element: <Login />, // ✅ hona chahiye
   },
-  {
-  path: "/dashboard",
-  element: <Dashboard />,
-}
+  { path: "/dashboard", 
+    element: <Dashboard /> }, // ✅ lowercase
 ,
   {
     path: "/success",
