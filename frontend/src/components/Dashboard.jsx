@@ -12,17 +12,17 @@ const Dashboard = () => {
   }, []);
 
   const filtered = participants.filter(p =>
-    p.fullName.toLowerCase().includes(search.toLowerCase())
+    p?.fullName?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="bg-slate-900 text-white min-h-screen p-6">
       {/* Top Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <Card title="Total Registrations" value={stats.totalRegistrations} />
-        <Card title="Present Students" value={stats.present} color="green" />
-        <Card title="Absent Students" value={stats.absent} color="red" />
-        <Card title="Attendance Rate" value={`${stats.attendanceRate}%`} />
+        <Card title="Total Registrations" value={stats?.totalRegistrations || 0} />
+        <Card title="Present Students" value={stats?.present || 0} color="green" />
+        <Card title="Absent Students" value={stats?.absent || 0} color="red" />
+        <Card title="Attendance Rate" value={`${stats?.attendanceRate || 0}%`} />
       </div>
 
       {/* Search & Filter */}
@@ -35,9 +35,9 @@ const Dashboard = () => {
           onChange={e => setSearch(e.target.value)}
         />
         <div>
-          <button className="btn">All</button>
-          <button className="btn bg-green-600">Present</button>
-          <button className="btn bg-red-600">Absent</button>
+          <button className="px-3 py-1 bg-slate-700 rounded mr-2">All</button>
+          <button className="px-3 py-1 bg-green-600 rounded mr-2">Present</button>
+          <button className="px-3 py-1 bg-red-600 rounded">Absent</button>
         </div>
       </div>
 
@@ -75,7 +75,9 @@ const Dashboard = () => {
 };
 
 const Card = ({ title, value, color }) => (
-  <div className={`p-4 rounded bg-slate-800 ${color ? `border-${color}-500` : ""}`}>
+  <div className={`p-4 rounded bg-slate-800 
+      ${color === "green" ? "border-green-500" : ""} 
+      ${color === "red" ? "border-red-500" : ""}`}>
     <h3 className="text-sm text-gray-400">{title}</h3>
     <p className="text-2xl font-bold">{value}</p>
   </div>
