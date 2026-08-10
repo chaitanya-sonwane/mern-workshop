@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
+  // ✅ Admin access check
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      alert("Please login as admin first!");
+      navigate("/login");
+    }
+  }, []);
+
   const [stats, setStats] = useState({});
   const [participants, setParticipants] = useState([]);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("home"); // default view
+  const [filter, setFilter] = useState("home");
 
   // ✅ Fetch dashboard stats
   useEffect(() => {
@@ -55,7 +67,6 @@ function Dashboard() {
     return matchesSearch;
   });
 
-  // ✅ Limit top 10 users for home view
   const displayedParticipants =
     filter === "home"
       ? filteredParticipants.slice(0, 10)
@@ -80,8 +91,7 @@ function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 bg-gray-100 overflow-hidden"> {/* ✅ No vertical scroll */}
-        {/* Header with Search */}
+      <main className="flex-1 p-6 bg-gray-100 overflow-hidden">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
           <input
@@ -130,7 +140,7 @@ function Dashboard() {
                     <select
                       value={p.attendanceStatus || ""}
                       onChange={e => handleAttendance(p._id, e.target.value)}
-                      className="border rounded p-1"
+                      className="border rounded p-1 transition-colors duration-200 hover:bg-indigo-100 focus:bg-indigo-200 cursor-pointer"
                     >
                       <option value="">Select</option>
                       <option value="Present">Present</option>

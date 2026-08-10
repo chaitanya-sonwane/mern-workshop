@@ -1,23 +1,43 @@
 import { useLocation } from "react-router-dom";
 
 function SuccessPage() {
-  const { state } = useLocation(); // ✅ correct syntax
-  const user = state?.user;        // ✅ safely access user
+  const { state } = useLocation();
+  const user = state?.user;
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-green-800 text-white rounded-lg shadow-lg text-center">
-      <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
-      {user ? (
-        <>
-          <p>Name: {user.fullName}</p>
-          <p>ID: WG{user._id.toString().slice(-4)}</p>
-          <p>Workshop: {user.workshopName}</p>
-          <p>Date: {new Date(user.registrationDate).toLocaleDateString()}</p>
-          <p>Time: {new Date(user.registrationDate).toLocaleTimeString()}</p>
-        </>
-      ) : (
-        <p>No user details found.</p>
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white">
+      <div className="w-full max-w-2xl p-8 bg-gray-800 rounded-lg shadow-lg text-center border border-blue-600">
+        <h2 className="text-3xl font-bold mb-6 text-blue-500">
+          Registration Successful!
+        </h2>
+
+        {user ? (
+          <div className="space-y-3 text-lg">
+            <p>
+              <span className="font-semibold text-blue-300">Name:</span>{" "}
+              {user.fullName}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-300">ID:</span>{" "}
+              WG{user._id.toString().slice(-4)}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-300">Workshop:</span>{" "}
+              {user.workshopName}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-300">Date:</span>{" "}
+              {new Date(user.registrationDate).toLocaleDateString()}
+            </p>
+            <p>
+              <span className="font-semibold text-blue-300">Time:</span>{" "}
+              {new Date(user.registrationDate).toLocaleTimeString()}
+            </p>
+          </div>
+        ) : (
+          <p className="text-gray-300">No user details found.</p>
+        )}
+      </div>
     </div>
   );
 }

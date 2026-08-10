@@ -15,13 +15,13 @@ function Login() {
       // ✅ Check status and role together
       if (res.status === 200 && res.data.role === "admin") {
         alert("Welcome Admin!");
+        localStorage.setItem("adminToken", res.data.token); // ✅ store token
         navigate("/dashboard");
       } else {
         alert(res.data.message || "Access denied: Only admin can login");
       }
     } catch (err) {
       console.error("Login error:", err);
-      // ✅ Show backend message if available
       if (err.response && err.response.data && err.response.data.message) {
         alert(err.response.data.message);
       } else {
@@ -31,25 +31,34 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Admin Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white">
+      <div className="max-w-md w-full p-8 bg-gray-800 rounded-lg shadow-lg border border-blue-600">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-500">Admin Login</h2>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Admin Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-2 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-2 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-red-600 hover:bg-red-700 p-2 rounded font-semibold text-white transition-colors duration-200"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

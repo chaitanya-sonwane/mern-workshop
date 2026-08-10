@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-  const navigate = useNavigate(); // ✅ move to top
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -35,7 +35,7 @@ function Register() {
 
       if (res.status === 201) {
         const u = res.data.user;
-        navigate("/success", { state: { user: u } }); // ✅ works fine now
+        navigate("/success", { state: { user: u } });
       } else {
         alert(res.data.message);
       }
@@ -52,85 +52,89 @@ function Register() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white rounded-lg shadow-lg overflow-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Workshop Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="tel"
-          name="mobile"
-          placeholder="Mobile Number"
-          value={formData.mobile}
-          onChange={(e) => {
-            const value = e.target.value.replace(/\D/g, "");
-            if (value.length <= 10) {
-              setFormData({ ...formData, mobile: value });
-            }
-          }}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="text"
-          name="organization"
-          placeholder="College / Organization Name"
-          value={formData.organization}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="text"
-          name="profession"
-          placeholder="Course / Profession"
-          value={formData.profession}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          value={formData.city}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <input
-          type="text"
-          name="workshopName"
-          placeholder="Workshop Name"
-          value={formData.workshopName}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
-          required
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 p-2 rounded font-semibold"
-        >
-          {loading ? "Registering..." : "Register"}
-        </button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white">
+      <div className="max-w-md w-full p-6 bg-gray-800 rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-500">
+          Workshop Registration
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="tel"
+            name="mobile"
+            placeholder="Mobile Number"
+            value={formData.mobile}
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/g, "");
+              if (value.length <= 10) {
+                setFormData({ ...formData, mobile: value });
+              }
+            }}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="organization"
+            placeholder="College / Organization Name"
+            value={formData.organization}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="profession"
+            placeholder="Course / Profession"
+            value={formData.profession}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <input
+            type="text"
+            name="workshopName"
+            placeholder="Workshop Name"
+            value={formData.workshopName}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-red-600 hover:bg-red-700 p-2 rounded font-semibold text-white transition-colors duration-200"
+          >
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
