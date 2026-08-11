@@ -29,20 +29,6 @@ function Login() {
       }
     }
   };
-const handleLogin = async () => {
-  const res = await fetch("http://localhost:5000/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
-  const data = await res.json();
-  if (res.ok) {
-    localStorage.setItem("adminToken", data.token);
-    window.location.href = "/dashboard";
-  } else {
-    alert(data.message);
-  }
-};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white">
