@@ -147,9 +147,11 @@ function Dashboard() {
               </tbody>
             </table>
           </div>
+          
         )}
       </main>
     </div>
+    
   );
 }
 

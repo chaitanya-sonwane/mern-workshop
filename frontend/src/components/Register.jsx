@@ -41,7 +41,7 @@ function Register() {
       }
     } catch (err) {
       console.error(err);
-      if (err.response && err.response.status === 400) {
+      if (err.response?.status === 400) {
         alert(err.response.data.message);
       } else {
         alert("Error registering user. Please try again.");
@@ -52,19 +52,20 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="max-w-md w-full p-6 bg-gray-800 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center text-blue-500">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white px-4">
+      <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg border border-blue-600 p-6 sm:p-8">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-blue-500">
           Workshop Registration
         </h2>
-        <form onSubmit={handleSubmit}>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             name="fullName"
             placeholder="Full Name"
             value={formData.fullName}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -73,7 +74,7 @@ function Register() {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -87,7 +88,7 @@ function Register() {
                 setFormData({ ...formData, mobile: value });
               }
             }}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -96,7 +97,7 @@ function Register() {
             placeholder="College / Organization Name"
             value={formData.organization}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -105,7 +106,7 @@ function Register() {
             placeholder="Course / Profession"
             value={formData.profession}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -114,7 +115,7 @@ function Register() {
             placeholder="City"
             value={formData.city}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
@@ -123,17 +124,23 @@ function Register() {
             placeholder="Workshop Name"
             value={formData.workshopName}
             onChange={handleChange}
-            className="w-full p-2 mb-4 rounded bg-gray-700 focus:outline-none"
+            className="w-full p-2 sm:p-3 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-red-600 hover:bg-red-700 p-2 rounded font-semibold text-white transition-colors duration-200"
+            className="w-full bg-red-600 hover:bg-red-700 p-2 sm:p-3 rounded font-semibold text-white transition-colors duration-200"
           >
             {loading ? "Registering..." : "Register"}
           </button>
         </form>
+
+        {/* Footer */}
+        <p className="text-center text-gray-400 text-xs sm:text-sm mt-6">
+          © 2026 Workshop Portal
+        </p>
       </div>
     </div>
   );
