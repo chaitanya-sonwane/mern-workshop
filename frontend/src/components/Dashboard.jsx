@@ -147,9 +147,13 @@ function Dashboard() {
                 ))}
               </tbody>
             </table>
-              <button onClick={handleLogout} className="hover:text-red-400 mt-6 border-t border-indigo-500 pt-4 text-center md:text-left  bg-indigo-700">
-          Logout
-        </button>
+             <button
+  onClick={handleLogout}
+  className="md:hidden mt-6 mx-auto bg-indigo-700 text-white font-semibold py-2 px-6 rounded-full border border-indigo-500 hover:bg-indigo-800 transition-colors duration-200"
+>
+  Logout
+</button>
+
           </div>
           
         )}
