@@ -79,10 +79,8 @@ function Dashboard() {
             <li><button onClick={() => setFilter("absent")} className="hover:text-yellow-300">Absent</button></li>
           </ul>
         </div>
-        <button onClick={handleLogout} className="hover:text-red-400 mt-6 border-t border-indigo-500 pt-4 text-center md:text-left">
-          Logout
-        </button>
       </aside>
+      
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-6 bg-gray-100 overflow-x-auto">
