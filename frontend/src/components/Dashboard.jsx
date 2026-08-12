@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const navigate = useNavigate();
 
-  useEffect(() => {
+ useEffect(() => {
   const token = localStorage.getItem("adminToken");
   if (!token) {
+    alert("Please login first to access the dashboard!");
     navigate("/login", { replace: true });
   }
 }, [navigate]);
@@ -146,6 +147,9 @@ function Dashboard() {
                 ))}
               </tbody>
             </table>
+              <button onClick={handleLogout} className="hover:text-red-400 mt-6 border-t border-indigo-500 pt-4 text-center md:text-left  bg-indigo-700">
+          Logout
+        </button>
           </div>
           
         )}
